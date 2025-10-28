@@ -10,6 +10,10 @@ Esercizio con SELECT
 3:  SELECT *
     FROM students
     WHERE date_of_birth < "1995-03-05";
+    
+    Oppure si può scrivere 
+
+    WHERE TIMESTAMPDIFF(YEAR, date_of_birth, curdate()) > 30;
 
 4:  SELECT *
     FROM courses

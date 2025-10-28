@@ -2,9 +2,16 @@ Esercizio con Group By
 
 1:  SELECT COUNT(*)
     FROM students
-    GROUP BY enrolment_date;
+    GROUP BY YEAR (enrolment_date);
 
-2:  SELECT COUNT(*)
+    inserito YEAR perchè se no prendeva ogni signola data oppure si potrebbe fare con degli alias
+    SELECT YEAR (enrolment_date) AS anno_iscrizione,
+    COUNT(*) AS numero_iscritti
+    FROM students
+    GROUP BY YEAR (enrolment_date)
+    ORDER BY anno_iscrizione
+
+2:  SELECT COUNT(*), office_address
     FROM teachers
     GROUP BY office_address
 
