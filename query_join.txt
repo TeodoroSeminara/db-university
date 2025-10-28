@@ -1,0 +1,61 @@
+Esercizio su JOIN
+
+1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
+
+    SELECT *
+    FROM students
+    JOIN degrees ON students.degree_id = degrees.id 
+    WHERE degrees.name = "Corso di Laurea in Economia" 
+
+2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di
+Neuroscienze
+
+    SELECT *
+    FROM degrees AS DE
+    JOIN departments AS D ON  D.id = DE.department_id
+    WHERE DE.level = "magistrale" AND D.name = "Dipartimento di Neuroscienze"
+
+3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
+
+    SELECT C.name, T.name, T.surname, CT.teacher_id
+    FROM courses AS C
+    JOIN course_teacher AS CT ON C.id = CT.course_id
+    JOIN teachers AS T ON t.id = CT.teacher_id
+    WHERE T.id = 44
+
+4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui
+sono iscritti e il relativo dipartimento, in ordine alfabetico per cognome e
+nome
+
+    SELECT S.name, S.surname, DE.name, D.name, D.level, DE.address
+    FROM students AS S
+    JOIN degrees AS D ON D.id = S.degree_id
+    JOIN departments AS DE  ON DE.id = D.department_id
+    ORDER BY S.surname, S.name;
+
+5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
+
+    SELECT *
+    FROM degrees AS D
+    JOIN courses AS C ON C.degree_id = D.id
+    JOIN course_teacher AS CT ON C.id = CT.course_id
+    JOIN teachers AS T ON T.id = CT.teacher_id
+
+6. Selezionare tutti i docenti che insegnano nel Dipartimento di
+Matematica (54)
+
+    SELECT distinct T.name AS teacher_name,
+    T.surname AS teacher_surname,
+    DE.name AS department_name
+    FROM teachers AS T
+    JOIN course_teacher AS CT ON T.id = CT.teacher_id
+    JOIN courses AS C ON C.id = CT.course_id
+    JOIN degrees AS D ON D.id = C.degree_id
+    JOIN departments AS DE ON DE.id = D.department_id
+    WHERE DE.name = "Dipartimento di Matematica"
+
+7. BONUS: Selezionare per ogni studente il numero di tentativi sostenuti
+per ogni esame, stampando anche il voto massimo. Successivamente,
+filtrare i tentativi con voto minimo 18
+
+    
